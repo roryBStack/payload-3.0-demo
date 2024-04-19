@@ -3,7 +3,17 @@ import { Background } from '@/components/Background'
 import Link from 'next/link'
 import React from 'react'
 
-const Page = () => {
+import { getPayload } from 'payload'
+import configPromise from "@payload-config";
+
+
+const Page = async () => {
+  const payload = await getPayload({ config: configPromise })
+
+const data = await payload.find({
+  collection: 'pages',
+})
+
   return (
     <>
       <main>
@@ -35,10 +45,11 @@ import configPromise from "@payload-config";
 const payload = await getPayload({ config: configPromise })
 
 const data = await payload.find({
-  collection: 'posts',
+  collection: 'pages',
 })
 
 return <Posts data={data} />
+${JSON.stringify(data)}
 `}
             </code>
           </pre>
